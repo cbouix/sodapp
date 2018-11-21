@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:text="@string/titulo_clientes"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
+
+            <Spinner
+                android:id="@+id/spn_clientes"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/txt_direccion"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
+                android:layout_alignTop="@+id/spn_domicilios"
+                android:layout_margin="5dp"
+                android:text="Dirección:"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
+
+            <Spinner
+                android:id="@+id/spn_domicilios"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_toLeftOf="@+id/btnAddCliente"
+                android:layout_toRightOf="@+id/txt_direccion"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/lvVisitas"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="5dp">
+
+        </ListView>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btnAddVisita"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_action_add_circle"
+        />
+</RelativeLayout>

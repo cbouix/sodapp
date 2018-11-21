@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/lay_bubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/bubble_green_me"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_destinatario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="2dp"
+            android:textSize="10dp"
+            android:visibility="visible" />
+
+
+        <TextView
+            android:id="@+id/txt_comentario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="2dp"
+            android:textSize="14dp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+</LinearLayout>

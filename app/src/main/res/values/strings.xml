@@ -1,0 +1,134 @@
+<resources>
+    <string name="app_name">SodApp</string>
+    <string name="ruta_name">Nueva dirección</string>
+
+    <string name="mensaje_espera">Por favor, aguarde...</string>
+
+    <string-array name="item_array_menu">
+        <item>Rutas</item>
+        <item>Remitos</item>
+        <item>Clientes</item>
+        <item>Novedades</item>
+        <item>Mensajes</item>
+        <item>Cobranzas</item>
+        <item>Visitas</item>
+        <item>Visitas Rastrillo</item>
+        <item>Reportes del día</item>
+        <item>Stock</item>
+    </string-array>
+
+    <string-array name="seleccion_posicion_ruta">
+        <item>Agregar recorrido en la posición anterior</item>
+        <item>Editar recorrido</item>
+        <item>Agregar recorrido en la posición posterior</item>
+    </string-array>
+    <string-array name="seleccion_remito_visita">
+        <item>Compra</item>
+        <item>No Compra</item>
+        <item>Cobranza</item>
+    </string-array>
+    <string name="mensaje_posicion_ruta">¿Dónde quiere agregar la nueva ruta?</string>
+    <string name="mensaje_accion_ruta">¿Qué acción desea realizar?</string>
+    <string name="mensaje_reintentar">No tiene conexión a internet, ¿Desea reintentar el envío o salir e intentar más tarde?</string>
+
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="confirmacion_cerrar_sesion">¿Desea cerrar sesión?</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="salir">Salir</string>
+    <string name="string_working">Procesando</string>
+    <string name="empty_rutas">No hay rutas disponibles</string>
+    <string name="empty_remitos">No hay remitos disponibles</string>
+    <string name="empty_cobranza">No hay cobranzas disponibles</string>
+    <string name="empty_clientes">No hay clientes disponibles</string>
+    <string name="empty_novedades">No tiene novedades por el momento</string>
+    <string name="empty_visitas">No tiene visitas</string>
+    <string name="empty_stock">No tiene la lista de stock</string>
+    <string name="empty_historial">No tiene historial el cliente</string>
+    <string name="empty_mensajes">No tiene mensajes</string>
+    <string name="empty_repartidores">No hay repartidores</string>
+    <string name="guardar">Guardar</string>
+    <string name="enviar">Enviar</string>
+    <string name="login">Login</string>
+    <string name="configuracion">Configuración</string>
+    <string name="send_remitos">Enviar remitos</string>
+    <string name="hint_ruta">escribir la ruta</string>
+
+    <string name="remito">Remito</string>
+    <string name="txt_medios_de_pago">Medios de pago</string>
+    <string name="cobranza">Cobranza</string>
+
+    <string name="time_sleep">2</string>
+
+    <string name="titulo_articulos">Articulos</string>
+    <string name="titulo_clientes">Clientes</string>
+    <string name="titulo_tipo_visitas">Tipo de visita</string>
+    <string name="titulo_nuevo_cliente">Nuevo cliente</string>
+    <string name="titulo_nuevo_novedad">Novedad</string>
+    <string name="titulo_nuevo_visita">Visita</string>
+    <string name="titulo_nuevo_Mensaje">Mensaje</string>
+    <string name="titulo_elegir_contacto">Elegir contacto</string>
+    <string name="titulo_configuracion">Configuración</string>
+    <string name="titulo_send">Enviar remitos</string>
+    <string name="titulo_nro_remito">Nro remito:</string>
+
+    <string name="txt_nombre">Nombre: </string>
+    <string name="txt_direccion">Dirección: </string>
+    <string name="txt_cod_postal">Cod. Postal: </string>
+    <string name="txt_localidad">Localidad: </string>
+    <string name="txt_telefono">Teléfono (fijo): </string>
+    <string name="txt_telefono_celular">Teléfono (cel): </string>
+    <string name="txt_importe_total">Importe Total: </string>
+    <string name="txt_mail">E-mail: </string>
+    <string name="txt_descripcion">Descripción: </string>
+    <string name="txt_direccion_servicio">Dirección WS:</string>
+    <string name="txt_articulo">articulo</string>
+    <string name="txt_guardar_remito">Guardar Remito</string>
+    <string name="txt_guardar_cobranza">Guardar Cobranza</string>
+    <string name="txt_stock">Saldo</string>
+    <string name="txt_saldo">Stock</string>
+    <string name="txt_remitos_cobranza_guardados">Remitos y Cobranzas no enviados</string>
+    <string name="txt_remitos_guardados">Remitos no enviados</string>
+    <string name="txt_cobranza_guardados">Cobranzas no enviadas</string>
+
+    <string name="msj_error">Ha ocurrido un error inesperado</string>
+    <string name="msj_clinte_agregado">Ha creado el cliente de forma correcta</string>
+    <string name="msj_clinte_actualizado">Ha actualizado el cliente de forma correcta</string>
+    <string name="msj_clinte_seleccionado">Ha seleccionado el cliente</string>
+    <string name="msj_clinte_seleccionado_auto">Cliente seleccionado, vaya a los medios de pagos</string>
+    <string name="msj_novedad_agregado">Ha enviado una novedad nueva</string>
+    <string name="msj_visita_agregado">Ha creado una nueva visita</string>
+    <string name="msj_novedad_mensaje">El mensaje ha sido enviado</string>
+    <string name="msj_advertencia">¿Esta seguro de cambiar la ruta del WebService? si es incorrecta podrían dejar de funcionar los servicios</string>
+    <string name="msj_remito_ok">Ha creado el remito correctamente</string>
+    <string name="msj_cobranza_ok">Ha creado la cobranza correctamente</string>
+    <string name="msj_configuracion">Debe configurar la ruta del servicio</string>
+    <string name="msj_eliminar_articulo">¿Desea eliminar el articulo seleccionado?</string>
+    <string name="msj_eliminar_pago">¿Desea eliminar el medio de pago seleccionado?</string>
+    <string name="msj_editar_remito">¿Desea editar el remito seleccionado?</string>
+    <string name="msj_editar_cobranza">¿Desea editar la cobranza seleccionada?</string>
+    <string name="hint_escribe_mensaje">Escribe un mensaje</string>
+    <string name="hint_direccion_ws">http://xxxx.xxxx.xxxx.xxxx/</string>
+
+    <string name="msj_remito_no_guardado">Debe agregar articulos al remito</string>
+    <string name="msj_cobranza_no_guardado">Debe guardar el remito</string>
+    <string name="msj_campo_obligatorio">Campo obligatorio.</string>
+    <string name="msj_medio_de_pago_obligatorio">Tiene que tener por lo menos un medio de pago.</string>
+    <string name="msj_articulo_obligatorio">Tiene que tener por lo menos un articulo cargado.</string>
+    <string name="msj_domicilio_obligatorio">Debe seleccionar un domicilio.</string>
+    <string name="msj_campos_obligatorio_remito">Tiene que tener cargado un cliente y al menos un articulo.</string>
+    <string name="msj_campos_obligatorio_cobranza">Tiene que tener cargado un cliente y al menos un tipo de pago.</string>
+    <string name="msj_campos_obligatorios">Todos los campos son obligatorios.</string>
+    <string name="msj_no_conexion">No tiene conexión a internet, intente más tarde.</string>
+    <string name="msj_no_server">No responde el servicio, cambie la configuración de administrador.</string>
+    <string name="msj_nro_remito_obligatorio">Debe completar todos los campos del número de remito.</string>
+
+    <string name="txt_recordar_usuario">Recordar usuario</string>
+    <string name="txt_devolucion">devolución</string>
+    <string name="txt_devolucion_automatica">dev. automática</string>
+    <string name="txt_yo">Yo</string>
+    <string name="txt_crear_visita">Crear Visita</string>
+    <string name="txt_grabar_novedad">Grabar con novedad</string>
+    <string name="txt_crear_novedad">Crear Novedad</string>
+
+</resources>

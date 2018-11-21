@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Saldo: "
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/txt_saldo"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="$ 0.0"
+            android:textColor="@color/colorAccent"
+            android:layout_marginRight="5dp"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Importe: "
+            android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/txt_importe_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="$ 0.0"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spn_medioDePago"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_margin="10dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorAccent" />
+
+    <!-- Efectivo -->
+    <LinearLayout
+        android:id="@+id/ll_efectivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="2dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Importe: "
+            android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/et_importe"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="importe"
+            android:inputType="numberDecimal"
+            android:textSize="16dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/btnAddMedioDePago"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_action_add_circle" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- Tarjeta Credito y tarjeta Debito -->
+    <LinearLayout
+        android:id="@+id/ll_tarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="2dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Tarjetas: "
+                android:textSize="16dp" />
+
+            <Spinner
+                android:id="@+id/spn_tarjetas_credito"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
+            <Spinner
+                android:id="@+id/spn_tarjetas_debito"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_margin="10dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Nro: "
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/nro_tarjeta"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:inputType="number"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Operación: "
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/nro_operación"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:inputType="number"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/txt_cuotas"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Cuotas: "
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/nro_cuotas"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:inputType="number"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Bancos: "
+                android:textSize="16dp" />
+
+            <Spinner
+                android:id="@+id/spn_banco"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!-- Cheque -->
+    <LinearLayout
+        android:id="@+id/ll_cheque"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="115dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Nro doc: "
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/et_nro_documento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="11.111.111"
+                android:inputType="number"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="115dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Vencimiento:"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/et_vencimiento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/editTextBackground"
+                android:ems="10"
+                android:inputType="number"
+                android:textColor="?attr/editTextColor" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/lv_medios_de_pagos"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_margin="5dp"
+            android:layout_weight="1"></ListView>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+</LinearLayout>

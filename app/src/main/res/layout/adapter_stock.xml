@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/titulo_cod_articulo"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textColor="@color/colorPrimary"
+                android:text="Artículo: "
+                android:textStyle="bold"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tv_nombre_articulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="60964-421"
+                android:textStyle="bold"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/titulo_cant_cajones"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="Cajones: "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_cant_cajones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:lines="1"
+                    android:text="32"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/titulo_cant_cajones_vacios"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="vacios: "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_cant_cajones_vacios"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="32"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/titulo_cant_individuales"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="Individuales: "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_cant_individuales"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:lines="1"
+                    android:text="32"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/titulo_cant_individuales_vacios"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="vacios: "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_cant_individuales_vacios"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="32"
+                    android:textSize="16dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/titulo_cant_totales"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="Totales: "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_cant_totales"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:lines="1"
+                    android:text="32"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/titulo_cant_totales_vacios"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="vacios: "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_cant_totales_vacios"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="32"
+                    android:textSize="16dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

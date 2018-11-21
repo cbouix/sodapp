@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#000000</color>
+    <color name="colorWhite">#FFF</color>
+    <color name="colorRed">#F00</color>
+
+    <color name="colorVisitados">#C6FFD8</color>
+    <color name="colorVisitaPospuesta">#FEB2B2</color>
+    <color name="colorDisable">#D8D8D8</color>
+</resources>

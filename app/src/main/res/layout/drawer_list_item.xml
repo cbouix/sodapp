@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView android:id="@+id/tv_nombre_repartidor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp"
+        android:textSize="30dp"
+        android:textColor="@android:color/white"
+        android:text="Nombre Repartidor"
+        xmlns:android="http://schemas.android.com/apk/res/android" />
+
+    <View
+        android:id="@+id/view_linea"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorAccent" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tv_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="14dp"
+        android:textSize="20dp"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
