@@ -44,6 +44,8 @@
     <string name="empty_novedades">No tiene novedades por el momento</string>
     <string name="empty_visitas">No tiene visitas</string>
     <string name="empty_stock">No tiene la lista de stock</string>
+    <string name="empty_reportes">No tiene reportes en el día</string>
+    <string name="empty_venta_articulos">No tiene venta de articulos</string>
     <string name="empty_historial">No tiene historial el cliente</string>
     <string name="empty_mensajes">No tiene mensajes</string>
     <string name="empty_repartidores">No hay repartidores</string>

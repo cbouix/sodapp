@@ -20,7 +20,7 @@ public class Visita {
     private String descripcion;
 
     @SerializedName("ClienteId")
-    private String clienteId;
+    private int clienteId;
 
     @SerializedName("ClienteCod")
     private String clienteCod;
@@ -52,15 +52,18 @@ public class Visita {
     @SerializedName("TipoVisitaNombre")
     private String tipoVisitaNombre;
 
+    @SerializedName("ListaPrecioId")
+    private String listPrecioId;
+
     public int getId() {
         return id;
     }
 
-    public String getClienteId() {
+    public int getClienteId() {
         return clienteId;
     }
 
-    public void setClienteId(String clienteId) {
+    public void setClienteId(int clienteId) {
         this.clienteId = clienteId;
     }
 
@@ -166,6 +169,14 @@ public class Visita {
 
     public void setTipoVisitaNombre(String tipoVisitaNombre) {
         this.tipoVisitaNombre = tipoVisitaNombre;
+    }
+
+    public String getListPrecioId() {
+        return listPrecioId;
+    }
+
+    public void setListPrecioId(String listPrecioId) {
+        this.listPrecioId = listPrecioId;
     }
 
     @Override

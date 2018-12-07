@@ -15,10 +15,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.app.cbouix.sodapp.Activities.RemitoActivity;
 import com.app.cbouix.sodapp.Activities.VisitaActivity;
 import com.app.cbouix.sodapp.Adapters.VisitaAdapter;
 import com.app.cbouix.sodapp.Business.ClientesBusiness;
 import com.app.cbouix.sodapp.Business.VisitaBusiness;
+import com.app.cbouix.sodapp.DataAccess.DataAccess.Preferences.AppPreferences;
 import com.app.cbouix.sodapp.Models.Cliente;
 import com.app.cbouix.sodapp.Models.Domicilio;
 import com.app.cbouix.sodapp.Models.Visita;
@@ -33,7 +35,7 @@ import java.util.List;
  * Created by CBouix on 21/05/2017.
  */
 
-public class VisitaFragment extends Fragment {
+public class VisitaFragment extends Fragment implements VisitaAdapter.IAction{
 
     public static final int VISITA = 0;
     public static final int VISITA_RASTRILLO = 1;
@@ -238,7 +240,7 @@ public class VisitaFragment extends Fragment {
             public void run() {
                 try {
 
-                    final List<Visita> visitas = _tipoVisita == 0 ? VisitaBusiness.getVisitas(getActivity(), clienteId):
+                    final List<Visita> visitas = _tipoVisita == VISITA ? VisitaBusiness.getVisitas(getActivity(), clienteId):
                                                             VisitaBusiness.getVisitasPorTipo(getActivity(), "POS");
                     //Thread.sleep(Integer.parseInt(getResources().getString(R.string.time_sleep)));
                     getActivity().runOnUiThread(new Runnable() {
@@ -279,8 +281,75 @@ public class VisitaFragment extends Fragment {
         if (visitas == null || visitas.size() == 0) {
             Toast.makeText(getActivity(), getResources().getString(R.string.empty_visitas), Toast.LENGTH_LONG).show();
         } else {
-            adapter = new VisitaAdapter(getActivity(), visitas);
+            adapter = new VisitaAdapter(getActivity(), visitas, this, _tipoVisita);
             lvVisitas.setAdapter(adapter);
         }
     }
+
+    @Override
+    public void goRemito(final int clienteId, final String clienteNombre, final String listaPrecioId,
+                         final String clienteCode, final String domicilioId, final String domicilioNombre,
+                         final int position){
+        final ProgressDialog progress = ProgressDialog.show(getActivity(), getString(R.string.app_name),
+                getString(R.string.string_working), true);
+        progress.show();
+
+        Intent i = new Intent(getActivity(),
+                RemitoActivity.class);
+        i.putExtra(RutasFragment.CLIENTE_ID, clienteId);
+        i.putExtra(RutasFragment.DOMICILIO_ID, Integer.parseInt(domicilioId));
+        i.putExtra(RutasFragment.CLIENTE_NOMBRE, clienteNombre);
+        i.putExtra(RutasFragment.CLIENTE_CODE, clienteCode);
+        i.putExtra(RutasFragment.DOMICILIO_NOMBRE, domicilioNombre);
+        i.putExtra(RutasFragment.LISTA_PRECIO, listaPrecioId);
+        i.putExtra(RutasFragment.POSITION, position);
+        startActivity(i);
+
+        progress.dismiss();
+    }
+
+    @Override
+    public void goCobranza(final int clienteId, final String clienteNombre, final String clienteCode,
+                           final String listaPrecioId, final String domicilioId, final String domicilioNombre,
+                           final int position){
+        final ProgressDialog progress = ProgressDialog.show(getActivity(), getString(R.string.app_name),
+                getString(R.string.string_working), true);
+        progress.show();
+
+        AppPreferences.setBoolean(getActivity(), RemitoCobranzaFragment.COBRANZA, true);
+        Intent i = new Intent(getActivity(),
+                RemitoActivity.class);
+        i.putExtra(RutasFragment.CLIENTE_ID, clienteId);
+        i.putExtra(RutasFragment.DOMICILIO_ID, Integer.parseInt(domicilioId));
+        i.putExtra(RutasFragment.CLIENTE_NOMBRE, clienteNombre);
+        i.putExtra(RutasFragment.CLIENTE_CODE, clienteCode);
+        i.putExtra(RutasFragment.DOMICILIO_NOMBRE, domicilioNombre);
+        i.putExtra(RutasFragment.LISTA_PRECIO, listaPrecioId);
+        i.putExtra(RutasFragment.POSITION, position);
+        startActivity(i);
+
+        progress.dismiss();
+    }
+
+    @Override
+    public void goVisita(final int clienteId, final String clienteNombre, final String clienteCode,
+                         final String domicilioId, final String domicilioNombre, final int position){
+        final ProgressDialog progress = ProgressDialog.show(getActivity(), getString(R.string.app_name),
+                getString(R.string.string_working), true);
+        progress.show();
+
+        Intent i = new Intent(getActivity(),
+                VisitaActivity.class);
+        i.putExtra(RutasFragment.CLIENTE_ID, clienteId);
+        i.putExtra(RutasFragment.DOMICILIO_ID, Integer.parseInt(domicilioId));
+        i.putExtra(RutasFragment.CLIENTE_NOMBRE, clienteNombre);
+        i.putExtra(RutasFragment.CLIENTE_CODE, clienteCode);
+        i.putExtra(RutasFragment.DOMICILIO_NOMBRE, domicilioNombre);
+        i.putExtra(RutasFragment.POSITION, position);
+
+        startActivity(i);
+
+        progress.dismiss();
+    }
+
 }

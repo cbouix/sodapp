@@ -10,7 +10,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.app.cbouix.sodapp.Application.AnalyticsApplication;
 import com.app.cbouix.sodapp.Business.UserBusiness;
 import com.app.cbouix.sodapp.DataAccess.DataAccess.Preferences.AppPreferences;
 import com.app.cbouix.sodapp.Models.Repartidor;
@@ -42,10 +41,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        AnalyticsApplication application = (AnalyticsApplication) getApplication();
-        tracker = application.getDefaultTracker();
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         //OCULTAR ACTION BAR
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -83,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                 try {
-
+/*
                     tracker.send(new HitBuilders.EventBuilder()
                             .setCategory("LOGIN")
                             .setAction(usuario + "-"+ password)
@@ -93,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "Login");
                     bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, usuario + "-"+ password);
                     mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-
+*/
                     if (EnviromentManager.isAdmin(usuario, password)) {
                         Intent i = new Intent(getApplicationContext(),
                                 ConfigurationsActivity.class);
@@ -102,11 +97,11 @@ public class LoginActivity extends AppCompatActivity {
                         if(EnviromentManager.isEmpty(getApplicationContext())){
                             runOnUiThread(new Runnable() {
                                 public void run() {
-                                    Bundle bundle = new Bundle();
+                                    /*Bundle bundle = new Bundle();
                                     bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "Login configuracion error");
                                     bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.msj_configuracion));
                                     mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-                                    Toast.makeText(getApplicationContext(), R.string.msj_configuracion, Toast.LENGTH_LONG).show();
+                                    */Toast.makeText(getApplicationContext(), R.string.msj_configuracion, Toast.LENGTH_LONG).show();
                                 }
                             });
                         }else {
@@ -160,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (final Exception ex) {
                     runOnUiThread(new Runnable() {
                         public void run() {
+                            /*
                             tracker.send(new HitBuilders.EventBuilder()
                                     .setCategory("LOGIN")
                                     .setAction(ex.getMessage())
@@ -169,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                             bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "Login Error");
                             bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, ex.getMessage());
                             mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-
+                            */
                             Toast.makeText(getApplicationContext(), R.string.msj_error, Toast.LENGTH_LONG).show();
                         }
                     });

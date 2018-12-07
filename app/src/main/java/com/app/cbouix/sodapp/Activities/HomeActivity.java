@@ -33,14 +33,13 @@ import com.app.cbouix.sodapp.Fragments.ConsultaRemitoFragment;
 import com.app.cbouix.sodapp.Fragments.MensajesFragment;
 import com.app.cbouix.sodapp.Fragments.NovedadesFragment;
 import com.app.cbouix.sodapp.Fragments.RemitoCobranzaFragment;
+import com.app.cbouix.sodapp.Fragments.ReportesDelDiaFragment;
 import com.app.cbouix.sodapp.Fragments.RutasFragment;
 import com.app.cbouix.sodapp.Fragments.StockFragment;
 import com.app.cbouix.sodapp.Fragments.VisitaFragment;
 import com.app.cbouix.sodapp.PushNotifications.GcmIntentServices;
 import com.app.cbouix.sodapp.R;
 import com.app.cbouix.sodapp.Utils.AppDialogs;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -89,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
         DataBaseManager.getInstance().setupDatabase(this);
 
         //Registro GCM para Push notifications
-        registrarGCM();
+        //registrarGCM();
     }
 
     private void initNavigationDrawer(){
@@ -216,9 +215,9 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             }
 
-            //Stock
+            //Reportes del día
             case 9:
-                initFragment(new StockFragment());
+                initFragment(new ReportesDelDiaFragment());
                 break;
             //Stock
             case 10:

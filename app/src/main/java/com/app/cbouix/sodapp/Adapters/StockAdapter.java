@@ -49,23 +49,33 @@ public class StockAdapter extends BaseAdapter {
         view = LayoutInflater.from(this.context).inflate(R.layout.adapter_stock, null);
 
         TextView tv_articulo = (TextView) view.findViewById(R.id.tv_nombre_articulo);
+
+        TextView tv_cant_cargados = (TextView) view.findViewById(R.id.tv_cant_cargados);
+        TextView tv_cant_cargados_individuales = (TextView) view.findViewById(R.id.tv_cant_cargados_individuales);
+        TextView tv_cant_cargados_total = (TextView) view.findViewById(R.id.tv_cant_cargados_total);
+
         TextView tv_cant_cajones = (TextView) view.findViewById(R.id.tv_cant_cajones);
-        TextView tv_cant_cajones_vacios = (TextView) view.findViewById(R.id.tv_cant_cajones_vacios);
         TextView tv_cant_individuales = (TextView) view.findViewById(R.id.tv_cant_individuales);
-        TextView tv_cant_individuales_vacios = (TextView) view.findViewById(R.id.tv_cant_individuales_vacios);
         TextView tv_cant_totales = (TextView) view.findViewById(R.id.tv_cant_totales);
+
+        TextView tv_cant_cajones_vacios = (TextView) view.findViewById(R.id.tv_cant_cajones_vacios);
+        TextView tv_cant_individuales_vacios = (TextView) view.findViewById(R.id.tv_cant_individuales_vacios);
         TextView tv_cant_totales_vacios = (TextView) view.findViewById(R.id.tv_cant_totales_vacios);
 
         StockRepartidor stock = this.stock.get(position);
 
         tv_articulo.setText(stock.getArticuloNombre());
+
+        tv_cant_cargados.setText(String.valueOf(stock.getCargaCajones()));
+        tv_cant_cargados_individuales.setText(String.valueOf(stock.getCargaIndividuales()));
+        tv_cant_cargados_total.setText(String.valueOf(stock.getCargaTotal()));
+
         tv_cant_cajones.setText(String.valueOf(stock.getCantCajones()));
-        tv_cant_cajones_vacios.setText(String.valueOf(stock.getCantCajonesV()));
-
         tv_cant_individuales.setText(String.valueOf(stock.getCantIndividuales()));
-        tv_cant_individuales_vacios.setText(String.valueOf(stock.getCantIndividualesV()));
-
         tv_cant_totales.setText(String.valueOf(stock.getCantTotal()));
+
+        tv_cant_cajones_vacios.setText(String.valueOf(stock.getCantCajonesV()));
+        tv_cant_individuales_vacios.setText(String.valueOf(stock.getCantIndividualesV()));
         tv_cant_totales_vacios.setText(String.valueOf(stock.getCantTotalV()));
         return view;
     }

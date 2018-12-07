@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_cliente"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="40"
+            android:singleLine="true"
+            android:text="Cliente"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_comodato"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Comodato"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_prestado"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Prestado"
+            android:visibility="gone"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_importe"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="60"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Importe"
+            android:visibility="gone"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_motivo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="60"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Motivo"
+            android:visibility="gone"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_reportes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"></ListView>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

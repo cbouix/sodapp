@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_venta_articulos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Venta Articulos"
+                android:textSize="18dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/tv_venta_art"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+        <!-- REGION VENTA ARTICULOS -->
+        <LinearLayout
+            android:id="@+id/ll_encabezado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:id="@+id/tv_articulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="35"
+                android:gravity="center"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/tv_venta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Venta"
+                android:textColor="@color/colorAccent"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/tv_comodato"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Comodato"
+                android:textColor="@color/colorAccent"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/tv_prestado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Prestado"
+                android:textColor="@color/colorAccent"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <ListView
+            android:id="@+id/lvVentaArticulos"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_margin="5dp"></ListView>
+        <!-- REGION VENTA ARTICULOS -->
+
+        <LinearLayout
+            android:id="@+id/ll_venta_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Venta Total"
+                android:textSize="18dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/tv_venta_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_cobrado_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Cobrado Total"
+                android:textSize="18dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/tv_cobrado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_no_comprado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="No Compraron"
+                android:textSize="18dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/tv_no_compraron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

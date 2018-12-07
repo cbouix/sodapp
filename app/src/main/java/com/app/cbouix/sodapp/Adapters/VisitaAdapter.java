@@ -1,16 +1,21 @@
 package com.app.cbouix.sodapp.Adapters;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.app.cbouix.sodapp.Fragments.VisitaFragment;
 import com.app.cbouix.sodapp.Models.Visita;
 import com.app.cbouix.sodapp.R;
+import com.app.cbouix.sodapp.Utils.AppDialogs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +31,26 @@ public class VisitaAdapter extends BaseAdapter implements Filterable {
     List<Visita> visitas;
     List<Visita> visitasFilter;
     ValueFilter valueFilter;
+    VisitaFragment listener;
+    int tipoVisita= 0;
 
-    public VisitaAdapter(Context context, List<Visita> visitas){
+    public interface IAction{
+
+        void goRemito(int clienteId, String clienteNombre, String clienteCode, String listaPrecioId,
+                      String domicilioId, String domicilioNombre, final int position);
+        void goVisita(int clienteId, String clienteNombre, String clienteCode,
+                      String domicilioId, String domicilioNombre, int position);
+        void goCobranza(int clienteId, String clienteNombre, String clienteCode, String listaPrecioId,
+                        String domicilioId, String domicilioNombre, final int position);
+    }
+
+
+    public VisitaAdapter(Context context, List<Visita> visitas, VisitaFragment listener, int tipoVisita){
         this.context = context;
         this.visitas = visitas;
         this.visitasFilter = visitas;
+        this.listener = listener;
+        this.tipoVisita = tipoVisita;
     }
 
     @Override
@@ -49,15 +69,44 @@ public class VisitaAdapter extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         view = LayoutInflater.from(this.context).inflate(R.layout.adapter_visita, null);
 
         TextView tv_cliente = (TextView) view.findViewById(R.id.tv_cliente);
         TextView tv_domicilio = (TextView) view.findViewById(R.id.tv_domicilio);
         TextView tv_motivo = (TextView) view.findViewById(R.id.tv_motivo);
+        LinearLayout ll_visita = (LinearLayout) view.findViewById(R.id.ll_visita);
 
-        Visita vista = this.visitas.get(position);
+        final Visita vista = this.visitas.get(position);
+
+        if(this.tipoVisita == VisitaFragment.VISITA_RASTRILLO) {
+            ll_visita.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    final Handler handlerAddGrupo = new Handler() {
+                        public void handleMessage(Message msg) {
+                            switch (msg.what) {
+                                case AppDialogs.REQUEST_REMITO:
+                                    listener.goRemito(vista.getClienteId(), vista.getClienteNombre(), vista.getListPrecioId(),
+                                            vista.getClienteCod(), vista.getDomicilioId(), vista.getDireccion(), position);
+                                    break;
+                                case AppDialogs.REQUEST_VISITA:
+                                    listener.goVisita(vista.getClienteId(), vista.getClienteNombre(), vista.getClienteCod(),
+                                            vista.getDomicilioId(), vista.getDireccion(), position);
+                                    break;
+                                case AppDialogs.REQUEST_COBRANZA:
+                                    listener.goCobranza(vista.getClienteId(), vista.getClienteNombre(), vista.getListPrecioId(),
+                                            vista.getClienteCod(), vista.getDomicilioId(), vista.getDireccion(), position);
+                                    break;
+                            }
+                        }
+                    };
+                    AppDialogs.showPopupRemitoVisita(v.getContext(), handlerAddGrupo);
+                    return true;
+                }
+            });
+        }
 
         tv_cliente.setText(vista.getClienteNombre());
         tv_domicilio.setText(vista.getDireccion());

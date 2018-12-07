@@ -25,7 +25,7 @@ public class AnalyticsApplication extends Application {
      */
     synchronized public Tracker getDefaultTracker() {
         if (mTracker == null) {
-            mTracker = sAnalytics.newTracker(R.xml.global_tracker);
+            //mTracker = sAnalytics.newTracker(R.xml.global_tracker);
         }
         return mTracker;
     }

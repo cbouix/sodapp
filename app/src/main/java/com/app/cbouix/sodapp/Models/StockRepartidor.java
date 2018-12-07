@@ -15,6 +15,7 @@ public class StockRepartidor {
     @SerializedName("ArticuloNombre")
     private String articuloNombre;
 
+    //CAJONES LLENOS
     @SerializedName("CantCajones")
     private int cantCajones;
 
@@ -24,6 +25,7 @@ public class StockRepartidor {
     @SerializedName("CantTotal")
     private int cantTotal;
 
+    //CAJONES VACIOS
     @SerializedName("CantCajonesV")
     private int cantCajonesV;
 
@@ -33,6 +35,7 @@ public class StockRepartidor {
     @SerializedName("CantTotalV")
     private int cantTotalV;
 
+    //CARGA DE CAJONES
     @SerializedName("CargaCajones")
     private int cargaCajones;
 

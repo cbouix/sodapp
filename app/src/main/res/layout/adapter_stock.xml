@@ -1,205 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/titulo_cod_articulo"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:textColor="@color/colorPrimary"
+            android:text="Artículo: "
+            android:textStyle="bold"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_nombre_articulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="60964-421"
+            android:textStyle="bold"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:orientation="vertical">
 
+        <!-- region ENCABEZADO -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/titulo_cod_articulo"
-                android:layout_width="160dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:lines="1"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="20"
+                android:singleLine="true"
+                android:text=""
                 android:textColor="@color/colorPrimary"
-                android:text="Artículo: "
-                android:textStyle="bold"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="CANT."
+                android:textColor="@color/colorAccent"
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/tv_nombre_articulo"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:lines="1"
-                android:text="60964-421"
-                android:textStyle="bold"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="INDIVIDUALES"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="TOTAL"
+                android:textColor="@color/colorAccent"
                 android:textSize="16dp" />
         </LinearLayout>
+        <!-- endregion -->
 
+        <!-- region CARGA -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="20"
+                android:singleLine="true"
+                android:text="CARGA"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15dp" />
 
-                <TextView
-                    android:id="@+id/titulo_cant_cajones"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="Cajones: "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp" />
+            <TextView
+                android:id="@+id/tv_cant_cargados"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="comodato"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp"/>
 
-                <TextView
-                    android:id="@+id/tv_cant_cajones"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:lines="1"
-                    android:text="32"
-                    android:textSize="16dp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_cant_cargados_individuales"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="prestado"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/titulo_cant_cajones_vacios"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="vacios: "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp" />
-
-                <TextView
-                    android:id="@+id/tv_cant_cajones_vacios"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="32"
-                    android:textSize="16dp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_cant_cargados_total"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="comodato"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp"/>
 
         </LinearLayout>
+        <!-- endregion -->
 
+        <!-- region LLENOS -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="20"
+                android:singleLine="true"
+                android:text="LLENOS"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15dp" />
 
-                <TextView
-                    android:id="@+id/titulo_cant_individuales"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="Individuales: "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp" />
+            <TextView
+                android:id="@+id/tv_cant_cajones"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="comodato"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
 
-                <TextView
-                    android:id="@+id/tv_cant_individuales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:lines="1"
-                    android:text="32"
-                    android:textSize="16dp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_cant_individuales"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="prestado"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv_cant_totales"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="comodato"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
 
-                <TextView
-                    android:id="@+id/titulo_cant_individuales_vacios"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="vacios: "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp" />
-
-                <TextView
-                    android:id="@+id/tv_cant_individuales_vacios"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="32"
-                    android:textSize="16dp" />
-            </LinearLayout>
         </LinearLayout>
+        <!-- endregion -->
 
+        <!-- region VACIOS -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="20"
+                android:singleLine="true"
+                android:text="VACIOS"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15dp" />
 
-                <TextView
-                    android:id="@+id/titulo_cant_totales"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="Totales: "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp" />
+            <TextView
+                android:id="@+id/tv_cant_cajones_vacios"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="comodato"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp"/>
 
-                <TextView
-                    android:id="@+id/tv_cant_totales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:lines="1"
-                    android:text="32"
-                    android:textSize="16dp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_cant_individuales_vacios"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="prestado"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv_cant_totales_vacios"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="comodato"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
 
-                <TextView
-                    android:id="@+id/titulo_cant_totales_vacios"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="vacios: "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp" />
-
-                <TextView
-                    android:id="@+id/tv_cant_totales_vacios"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="32"
-                    android:textSize="16dp" />
-            </LinearLayout>
         </LinearLayout>
-
+        <!-- endregion -->
     </LinearLayout>
 
 </LinearLayout>
