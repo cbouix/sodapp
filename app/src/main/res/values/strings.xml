@@ -124,6 +124,7 @@
     <string name="msj_no_conexion">No tiene conexión a internet, intente más tarde.</string>
     <string name="msj_no_server">No responde el servicio, cambie la configuración de administrador.</string>
     <string name="msj_nro_remito_obligatorio">Debe completar todos los campos del número de remito.</string>
+    <string name="msj_no_tiene_lista_precio">No tiene lista de precio el cliente seleccionado.</string>
 
     <string name="txt_recordar_usuario">Recordar usuario</string>
     <string name="txt_devolucion">devolución</string>

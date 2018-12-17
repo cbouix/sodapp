@@ -159,6 +159,7 @@ public class MediosDePagoFragment extends RemitoMasterFragment implements Medios
         }
 
         txtSaldo.setText("$ " + AppPreferences.getString(getContext(), AppPreferences.KEY_SALDO_CLIENTE, "0.0"));
+        txtImporte.setText("");
         txtImporte.setText("$ " + AppPreferences.getString(getContext(), AppPreferences.KEY_IMPORTE_TOTAL, "0.0"));
 
         spn_tarjetas_credito.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

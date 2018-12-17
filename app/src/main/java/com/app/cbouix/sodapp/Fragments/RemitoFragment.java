@@ -108,6 +108,8 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
             this.getRemito(rootView, remitoId);
         }else{
             initControls(rootView);
+            AppPreferences.setString(getContext(), AppPreferences.KEY_SALDO_CLIENTE, "0.0");
+            AppPreferences.setString(getContext(), AppPreferences.KEY_IMPORTE_TOTAL, "0.0");
             AppPreferences.setInt(getContext(), AppPreferences.KEY_REMITO_EDIT_ID, 0);
             AppPreferences.setInt(getContext(), AppPreferences.KEY_COBRANZA_EDIT_ID, 0);
             AppPreferences.setInt(getContext(), AppPreferences.VERSION_REMITO, 0);
@@ -239,15 +241,6 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
             }
         });
 
-        //SI TIENE REMITO NO PUEDE CARGAR EL CLIENTE Y SE CARGA LA LISTA DE ARTICULOS
-        if(AppPreferences.getLong(getContext(),
-                AppPreferences.KEY_REMITO, 0) > 0){
-            showArticulos();
-            configLayout(llArticulos, btnAddCliente);
-            getArticulos();
-            txtImporteTotal.setText(String.valueOf(importeTotal) + " $");
-        }
-
         if(remito_editable != null){
             configLayout(llArticulos, btnAddCliente);
             clienteNombreSeleccionado = remito_editable.getRemitoCab().getClienteNombre();
@@ -262,6 +255,15 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
             articulos_seleccionados = articulos;
             saveArticulos(articulos);
             showArticulos();
+        }
+
+        //SI TIENE REMITO NO PUEDE CARGAR EL CLIENTE Y SE CARGA LA LISTA DE ARTICULOS
+        if(AppPreferences.getLong(getContext(),
+                AppPreferences.KEY_REMITO, 0) > 0){
+            //showArticulos();
+            configLayout(llArticulos, btnAddCliente);
+            //getArticulos();
+            //txtImporteTotal.setText(String.valueOf(importeTotal) + " $");
         }
 
         if(clienteIdSeleccionado > 0){
@@ -290,87 +292,100 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
     }
 
     private void configLayout(LinearLayout llArticulos, ImageView btnAddCliente){
-        spnClientes.setEnabled(false);
-        spnClientes.setClickable(false);
 
-        spnDomicilios.setEnabled(false);
-        spnDomicilios.setClickable(false);
+        if(cliente_seleccionado != null && cliente_seleccionado.getListPrecioId().equalsIgnoreCase("")) {
+            Toast.makeText(getActivity(), R.string.msj_no_tiene_lista_precio, Toast.LENGTH_LONG).show();
+        } else {
+            spnClientes.setEnabled(false);
+            spnClientes.setClickable(false);
 
-        ed_remitoUno.setEnabled(false);
-        ed_remitoDos.setEnabled(false);
+            spnDomicilios.setEnabled(false);
+            spnDomicilios.setClickable(false);
 
-        btnAddCliente.setEnabled(false);
-        btnAddCliente.setBackgroundResource(R.drawable.ic_action_add_circle_disable);
-        btnAddCliente.setClickable(false);
+            ed_remitoUno.setEnabled(false);
+            ed_remitoDos.setEnabled(false);
 
-        llArticulos.setVisibility(View.VISIBLE);
+            btnAddCliente.setEnabled(false);
+            btnAddCliente.setBackgroundResource(R.drawable.ic_action_add_circle_disable);
+            btnAddCliente.setClickable(false);
+
+            llArticulos.setVisibility(View.VISIBLE);
+        }
     }
 
     private void saveCliente(){
 
-        getArticulos();
+        if(cliente_seleccionado != null && cliente_seleccionado.getListPrecioId().equalsIgnoreCase("")) {
+            Toast.makeText(getActivity(), R.string.msj_no_tiene_lista_precio, Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                getArticulos();
 
-        //Creo un remito DB y lo guardo en la bd
-        com.app.cbouix.sodapp.DataAccess.DataBase.Cliente cliente =
-                new com.app.cbouix.sodapp.DataAccess.DataBase.Cliente(Long.valueOf(cliente_seleccionado.getId()),
-                        cliente_seleccionado.getCodigo(), cliente_seleccionado.getNombre());
+                //Creo un remito DB y lo guardo en la bd
+                com.app.cbouix.sodapp.DataAccess.DataBase.Cliente cliente =
+                        new com.app.cbouix.sodapp.DataAccess.DataBase.Cliente(Long.valueOf(cliente_seleccionado.getId()),
+                                cliente_seleccionado.getCodigo(), cliente_seleccionado.getNombre());
 
-        Remito remito = new Remito();
-        remito.setEmision(DateTimeUtil.getDateNowString());
-        remito.setDireccion(domicilio_seleccionado.getDireccion());
-        String numeroRemito = "";
-        if(ed_remitoUno.getText().toString() != null && !ed_remitoUno.getText().toString().isEmpty() &&
-                ed_remitoDos.getText().toString() != null && !ed_remitoDos.getText().toString().isEmpty()){
-            String num1 =String.format("%04d", Integer.decode(ed_remitoUno.getText().toString()));
-            String num2 =String.format("%08d", Integer.decode(ed_remitoDos.getText().toString()));
-            ed_remitoUno.setText(num1);
-            ed_remitoDos.setText(num2);
-            numeroRemito = num1 +num2;
-        }
-        remito.setNumero(numeroRemito);
-        remito.setClienteId(cliente_seleccionado.getId());
-        remito.setClienteCod(cliente_seleccionado.getCodigo());
-        remito.setClienteNombre(cliente_seleccionado.getNombre());
-        remito.setDomicilioId(domicilio_seleccionado.getDomicilioId());
-        remito.setListPrecioId(Integer.parseInt(cliente_seleccionado.getListPrecioId()));
-        remito.setRepartidorId(Integer.parseInt(AppPreferences.getString(getContext(),
+                Remito remito = new Remito();
+                remito.setEmision(DateTimeUtil.getDateNowString());
+                remito.setDireccion(domicilio_seleccionado.getDireccion());
+                String numeroRemito = "";
+                if (ed_remitoUno.getText().toString() != null && !ed_remitoUno.getText().toString().isEmpty() &&
+                        ed_remitoDos.getText().toString() != null && !ed_remitoDos.getText().toString().isEmpty()) {
+                    String num1 = String.format("%04d", Integer.decode(ed_remitoUno.getText().toString()));
+                    String num2 = String.format("%08d", Integer.decode(ed_remitoDos.getText().toString()));
+                    ed_remitoUno.setText(num1);
+                    ed_remitoDos.setText(num2);
+                    numeroRemito = num1 + num2;
+                }
+                remito.setNumero(numeroRemito);
+                remito.setClienteId(cliente_seleccionado.getId());
+                remito.setClienteCod(cliente_seleccionado.getCodigo());
+                remito.setClienteNombre(cliente_seleccionado.getNombre());
+                remito.setDomicilioId(domicilio_seleccionado.getDomicilioId());
+                remito.setListPrecioId(Integer.parseInt(cliente_seleccionado.getListPrecioId()));
+                remito.setRepartidorId(Integer.parseInt(AppPreferences.getString(getContext(),
                         AppPreferences.KEY_REPARTIDOR, "")));
 
-        //Creo una cobranza DB y lo guardo en la bd
-        Cobranza cobranza = new Cobranza();
-        cobranza.setEmision(DateTimeUtil.getDateNowString());
-        cobranza.setNumero("");
-        cobranza.setIsRemito(true);
-        cobranza.setImporteAplicado(0.0);
-        cobranza.setDomicilio(domicilio_seleccionado.getDireccion());
-        cobranza.setDomicilioId(domicilio_seleccionado.getDomicilioId());
-        cobranza.setClienteId(cliente_seleccionado.getId());
-        cobranza.setClienteCod(cliente_seleccionado.getCodigo());
-        cobranza.setClienteNombre(cliente_seleccionado.getNombre());
-        cobranza.setRepartidorId(Integer.parseInt(AppPreferences.getString(getContext(),
-                AppPreferences.KEY_REPARTIDOR, "")));
+                //Creo una cobranza DB y lo guardo en la bd
+                Cobranza cobranza = new Cobranza();
+                cobranza.setEmision(DateTimeUtil.getDateNowString());
+                cobranza.setNumero("");
+                cobranza.setIsRemito(true);
+                cobranza.setImporteAplicado(0.0);
+                cobranza.setDomicilio(domicilio_seleccionado.getDireccion());
+                cobranza.setDomicilioId(domicilio_seleccionado.getDomicilioId());
+                cobranza.setClienteId(cliente_seleccionado.getId());
+                cobranza.setClienteCod(cliente_seleccionado.getCodigo());
+                cobranza.setClienteNombre(cliente_seleccionado.getNombre());
+                cobranza.setRepartidorId(Integer.parseInt(AppPreferences.getString(getContext(),
+                        AppPreferences.KEY_REPARTIDOR, "")));
 
-        ClienteDao clienteDao = DataBaseManager.getInstance().getDaoSession().getClienteDao();
-        clienteDao.insertOrReplace(cliente);
+                ClienteDao clienteDao = DataBaseManager.getInstance().getDaoSession().getClienteDao();
+                clienteDao.insertOrReplace(cliente);
 
-        CobranzaDao cobranzaDao = DataBaseManager.getInstance().getDaoSession().getCobranzaDao();
-        cobranzaDao.insertOrReplace(cobranza);
+                CobranzaDao cobranzaDao = DataBaseManager.getInstance().getDaoSession().getCobranzaDao();
+                cobranzaDao.insertOrReplace(cobranza);
 
-        RemitoDao remitoDao = DataBaseManager.getInstance().getDaoSession().getRemitoDao();
-        remito.setCobranzaId(cobranzaDao.getKey(cobranza));
-        remitoDao.insertOrReplace(remito);
+                RemitoDao remitoDao = DataBaseManager.getInstance().getDaoSession().getRemitoDao();
+                remito.setCobranzaId(cobranzaDao.getKey(cobranza));
+                remitoDao.insertOrReplace(remito);
 
-        //Guardo el Id del cliente
-        AppPreferences.setLong(getContext(),
-                AppPreferences.KEY_CLIENTE, clienteDao.getKey(cliente));
+                //Guardo el Id del cliente
+                AppPreferences.setLong(getContext(),
+                        AppPreferences.KEY_CLIENTE, clienteDao.getKey(cliente));
 
-        //Guardo el Id del remito
-        AppPreferences.setLong(getContext(),
-                AppPreferences.KEY_REMITO, remitoDao.getKey(remito));
+                //Guardo el Id del remito
+                AppPreferences.setLong(getContext(),
+                        AppPreferences.KEY_REMITO, remitoDao.getKey(remito));
 
-        //Guardo el Id de la cobranza
-        AppPreferences.setLong(getContext(),
-                AppPreferences.KEY_COBRANZA, cobranzaDao.getKey(cobranza));
+                //Guardo el Id de la cobranza
+                AppPreferences.setLong(getContext(),
+                        AppPreferences.KEY_COBRANZA, cobranzaDao.getKey(cobranza));
+            } catch (Exception ex) {
+                Toast.makeText(getActivity(), R.string.msj_error, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void loadCliente(){
@@ -504,7 +519,8 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
     }
 
     private void saveArticulos(ArrayList<Articulo> articulos){
-
+        AppPreferences.setString(getContext(), AppPreferences.KEY_IMPORTE_TOTAL, "0");
+        importeTotal = 0;
         for (Articulo articulo:
              articulos) {
             //Creo el articulo(RemitoLin) y lo guardo en la bd
@@ -524,11 +540,11 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
             cuerpoRemito.setSigno(articulo.isDevolucion() ? -1 : 1);
 
             importeTotal = importeTotal + articulo.getPrecio() * articulo.getCantidad();
-            AppPreferences.setString(getContext(), AppPreferences.KEY_IMPORTE_TOTAL, String.valueOf(importeTotal));
-            txtImporteTotal.setText(String.valueOf(importeTotal) + " $");
 
             remitoLinDao.insertOrReplace(cuerpoRemito);
         }
+        AppPreferences.setString(getContext(), AppPreferences.KEY_IMPORTE_TOTAL, String.valueOf(importeTotal));
+        txtImporteTotal.setText(String.valueOf(importeTotal) + " $");
     }
 
     private void getClientes(){
@@ -679,14 +695,17 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
                 try {
                     if(cliente_seleccionado != null) {
                         articulos = ArticuloBusiness.getArticulos(getActivity(), cliente_seleccionado.getId(), cliente_seleccionado.getCodigo());
-                        //Thread.sleep(Integer.parseInt(getResources().getString(R.string.time_sleep)));
-                        getActivity().runOnUiThread(new Runnable() {
-                            public void run() {
-                                spnArticulos.setAdapter(new ArrayAdapter<Articulo>(getActivity(),
-                                        R.layout.adapter_spinner, R.id.tv_nombre, articulos));
-                            }
-                        });
                     }
+                    if(clienteIdSeleccionado > 0) {
+                        articulos = ArticuloBusiness.getArticulos(getActivity(), clienteIdSeleccionado, clienteCodeSeleccionado);
+                    }
+                    getActivity().runOnUiThread(new Runnable() {
+                        public void run() {
+                            spnArticulos.setAdapter(new ArrayAdapter<Articulo>(getActivity(),
+                                    R.layout.adapter_spinner, R.id.tv_nombre, articulos));
+                        }
+                    });
+
                 }catch (ConnectException ex) {
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
