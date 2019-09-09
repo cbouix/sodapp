@@ -43,7 +43,6 @@ import com.google.gson.Gson;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by CBouix on 09/04/2017.
@@ -56,10 +55,10 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
     Spinner spnClientes;
     Spinner spnDomicilios;
     Spinner spnArticulos;
-    ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-    ArrayList<Domicilio> domicilios = new ArrayList<Domicilio>();
-    ArrayList<Articulo> articulos = new ArrayList<Articulo>();
-    ArrayList<Articulo> articulos_seleccionados = new ArrayList<Articulo>();
+    ArrayList<Cliente> clientes = new ArrayList<>();
+    ArrayList<Domicilio> domicilios = new ArrayList<>();
+    ArrayList<Articulo> articulos = new ArrayList<>();
+    ArrayList<Articulo> articulos_seleccionados = new ArrayList<>();
     int clienteId;
     String clienteCod;
     int domicilioId;
@@ -91,7 +90,7 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
         rootView = inflater.inflate(R.layout.fragment_remito, container,
                 false);
 
-        progressLayout = (RelativeLayout) rootView.findViewById(R.id.progress_layout);
+        progressLayout = rootView.findViewById(R.id.progress_layout);
         progressLayout.setVisibility(View.GONE);
         clienteIdSeleccionado = getActivity().getIntent().getIntExtra(RutasFragment.CLIENTE_ID, 0);
         domicilioIdSeleccionado = getActivity().getIntent().getIntExtra(RutasFragment.DOMICILIO_ID, 0);
@@ -123,28 +122,26 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
     }
 
     private void initControls(View rootView){
-        final LinearLayout llClientes = (LinearLayout) rootView.findViewById(R.id.ll_clientes);
-        final LinearLayout llArticulos = (LinearLayout) rootView.findViewById(R.id.ll_articulos);
+        final LinearLayout llArticulos = rootView.findViewById(R.id.ll_articulos);
 
-        final EditText ed_cantidad = (EditText) rootView.findViewById(R.id.ed_cantidad);
-        final TextView tv_nombre = (TextView) rootView.findViewById(R.id.tv_nombre);
-        final TextView tv_precio = (TextView) rootView.findViewById(R.id.tv_precio);
+        final EditText ed_cantidad = rootView.findViewById(R.id.ed_cantidad);
+        final TextView tv_nombre = rootView.findViewById(R.id.tv_nombre);
+        final TextView tv_precio = rootView.findViewById(R.id.tv_precio);
 
-        final CheckBox cbDevolucion = (CheckBox) rootView.findViewById(R.id.cb_devolucion);
-        final CheckBox cbDevAuto = (CheckBox) rootView.findViewById(R.id.cb_devolucion_automatica);
+        final CheckBox cbDevolucion = rootView.findViewById(R.id.cb_devolucion);
+        final CheckBox cbDevAuto = rootView.findViewById(R.id.cb_devolucion_automatica);
 
-        ed_remitoUno = (EditText) rootView.findViewById(R.id.ed_remito_uno);
-        ed_remitoDos = (EditText) rootView.findViewById(R.id.ed_remito_dos);
+        ed_remitoUno = rootView.findViewById(R.id.ed_remito_uno);
+        ed_remitoDos = rootView.findViewById(R.id.ed_remito_dos);
 
-        spnClientes = (Spinner) rootView.findViewById(R.id.spn_clientes);
-        spnDomicilios = (Spinner) rootView.findViewById(R.id.spn_domicilios);
-        spnArticulos = (Spinner) rootView.findViewById(R.id.spn_articulos);
-        final ImageView btnAddCliente = (ImageView) rootView.findViewById(R.id.btnAddCliente);
+        spnClientes = rootView.findViewById(R.id.spn_clientes);
+        spnDomicilios = rootView.findViewById(R.id.spn_domicilios);
+        spnArticulos = rootView.findViewById(R.id.spn_articulos);
+        final ImageView btnAddCliente = rootView.findViewById(R.id.btnAddCliente);
 
-        //final TextView tvDireccionCliente = (TextView) rootView.findViewById(R.id.tv_direccion_cliente);
-        txtImporteTotal = (TextView) rootView.findViewById(R.id.txt_importe_total);
-        lvArticulos = (ListView) rootView.findViewById(R.id.lv_articulos);
-        ImageView btnAddArticulo = (ImageView) rootView.findViewById(R.id.btnAddArticulo);
+        txtImporteTotal = rootView.findViewById(R.id.txt_importe_total);
+        lvArticulos = rootView.findViewById(R.id.lv_articulos);
+        ImageView btnAddArticulo = rootView.findViewById(R.id.btnAddArticulo);
 
         cbDevolucion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
@@ -192,13 +189,17 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
         btnAddArticulo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                save_showArticulo(Integer.parseInt(ed_cantidad.getText().toString()), cbDevolucion.isChecked(), cbDevAuto.isChecked());
+                if (Integer.parseInt(ed_cantidad.getText().toString()) > 0){
+                    save_showArticulo(Integer.parseInt(ed_cantidad.getText().toString()), cbDevolucion.isChecked(), cbDevAuto.isChecked());
+                } else {
+                    Toast.makeText(getActivity(), R.string.msj_articulo_mayor_a_cero, Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         spnClientes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
-                if(cliente_seleccionado != (Cliente) parent.getItemAtPosition(position)){
+                if(cliente_seleccionado != parent.getItemAtPosition(position)){
                     cliente_seleccionado = (Cliente) parent.getItemAtPosition(position);
 
                     if(cliente_seleccionado.getId() > 0) {
@@ -235,7 +236,7 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
                 if(cbDevolucion.isChecked())
                     tv_precio.setText("");
                 else
-                    tv_precio.setText(String.valueOf(articulo_seleccionado.getPrecio()) + "$");
+                    tv_precio.setText(articulo_seleccionado.getPrecio() + "$");
             }
             public void onNothingSelected(AdapterView<?> parent){
             }
@@ -260,10 +261,10 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
         //SI TIENE REMITO NO PUEDE CARGAR EL CLIENTE Y SE CARGA LA LISTA DE ARTICULOS
         if(AppPreferences.getLong(getContext(),
                 AppPreferences.KEY_REMITO, 0) > 0){
-            //showArticulos();
+            showArticulos();
             configLayout(llArticulos, btnAddCliente);
-            //getArticulos();
-            //txtImporteTotal.setText(String.valueOf(importeTotal) + " $");
+            getArticulos();
+            txtImporteTotal.setText(String.valueOf(importeTotal) + " $");
         }
 
         if(clienteIdSeleccionado > 0){
@@ -276,7 +277,7 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
             cliente.setCodigo(clienteCodeSeleccionado);
             cliente.setListPrecioId(listaPrecioId);
             clientes.add(0, cliente);
-            spnClientes.setAdapter(new ArrayAdapter<Cliente>(getActivity(),
+            spnClientes.setAdapter(new ArrayAdapter<>(getActivity(),
                     R.layout.adapter_spinner, R.id.tv_nombre, clientes));
 
             Domicilio domicilio = new Domicilio();
@@ -513,7 +514,7 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
 
         importeTotal = (isDevolucion) ? importeTotal : importeTotal + current_articulo.getPrecio() * cantidad;
         AppPreferences.setString(getContext(), AppPreferences.KEY_IMPORTE_TOTAL, String.valueOf(importeTotal));
-        txtImporteTotal.setText(String.valueOf(importeTotal) + " $");
+        txtImporteTotal.setText(importeTotal + " $");
 
         remitoLinDao.insertOrReplace(cuerpoRemito);
     }
@@ -544,7 +545,7 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
             remitoLinDao.insertOrReplace(cuerpoRemito);
         }
         AppPreferences.setString(getContext(), AppPreferences.KEY_IMPORTE_TOTAL, String.valueOf(importeTotal));
-        txtImporteTotal.setText(String.valueOf(importeTotal) + " $");
+        txtImporteTotal.setText(importeTotal + " $");
     }
 
     private void getClientes(){
@@ -789,7 +790,7 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
         Articulo articulo = articulos_seleccionados.get(position);
         if(!articulo.isDevolucion()) {
             importeTotal = importeTotal - (articulo.getPrecio() * articulo.getCantidad());
-            txtImporteTotal.setText(String.valueOf(importeTotal) + " $");
+            txtImporteTotal.setText(importeTotal + " $");
         }
         articulos_seleccionados.remove(position);
         adapter.notifyDataSetChanged();
