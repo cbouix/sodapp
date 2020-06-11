@@ -41,11 +41,9 @@ public class RutaAdapter extends BaseAdapter implements Filterable {
         void addNewRuta(int action, Recorrido recorrido);
         void goCliente(String clienteId);
         void goRemito(String clienteId, String clienteNombre, String clienteCode, String listaPrecioId,
-                      String domicilioId, String domicilioNombre, final int position);
+                      String domicilioId, String domicilioNombre, String saldo, final int position, final boolean isCobranza);
         void goVisita(String clienteId, String clienteNombre, String clienteCode,
                       String domicilioId, String domicilioNombre, int position);
-        void goCobranza(String clienteId, String clienteNombre, String clienteCode, String listaPrecioId,
-                        String domicilioId, String domicilioNombre, final int position);
     }
 
     public RutaAdapter(Context context, List<Recorrido> rutas, ListView listViewForms, RutasFragment listener){
@@ -131,16 +129,16 @@ public class RutaAdapter extends BaseAdapter implements Filterable {
                         public void handleMessage(Message msg) {
                             switch (msg.what) {
                                 case AppDialogs.REQUEST_REMITO:
-                                    listener.goRemito(recorrido.getClienteId(), recorrido.getClienteNombre(), recorrido.getListaPrecioId(),
-                                            recorrido.getClienteCod(), recorrido.getDomicilioId(), recorrido.getClienteDomicilio(), position);
+                                    listener.goRemito(recorrido.getClienteId(), recorrido.getClienteNombre(), recorrido.getClienteCod(), recorrido.getListaPrecioId(),
+                                            recorrido.getDomicilioId(), recorrido.getClienteDomicilio(), recorrido.getSaldo(), position, false);
                                     break;
                                 case AppDialogs.REQUEST_VISITA:
                                     listener.goVisita(recorrido.getClienteId(), recorrido.getClienteNombre(),
                                             recorrido.getClienteCod(), recorrido.getDomicilioId(), recorrido.getClienteDomicilio(), position);
                                     break;
                                 case AppDialogs.REQUEST_COBRANZA:
-                                    listener.goCobranza(recorrido.getClienteId(), recorrido.getClienteNombre(), recorrido.getListaPrecioId(),
-                                            recorrido.getClienteCod(), recorrido.getDomicilioId(), recorrido.getClienteDomicilio(), position);
+                                    listener.goRemito(recorrido.getClienteId(), recorrido.getClienteNombre(), recorrido.getClienteCod(), recorrido.getListaPrecioId(),
+                                             recorrido.getDomicilioId(), recorrido.getClienteDomicilio(),recorrido.getSaldo(), position, true);
                                     break;
                             }
                         }

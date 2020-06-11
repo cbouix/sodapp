@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mydaogenerator/mydaogenerator.iml" filepath="$PROJECT_DIR$/mydaogenerator/mydaogenerator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sodapp.iml" filepath="$PROJECT_DIR$/sodapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="sodapp/app" />
+      <module fileurl="file://$PROJECT_DIR$/mydaogenerator/mydaogenerator.iml" filepath="$PROJECT_DIR$/mydaogenerator/mydaogenerator.iml" group="sodapp/mydaogenerator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/sodapp.iml" filepath="$PROJECT_DIR$/.idea/sodapp.iml" group="sodapp" />
     </modules>
   </component>
 </project>

@@ -43,6 +43,7 @@ public class RutasFragment extends Fragment implements RutaAdapter.IAddNewRuta{
     public static final String CLIENTE_NOMBRE = "CLIENTE_NOMBRE";
     public static final String DOMICILIO_NOMBRE = "DOMICILIO_NOMBRE";
     public static final String CLIENTE_CODE = "CLIENTE_CODE";
+    public static final String CLIENTE_SALDO = "CLIENTE_SALDO";
     public static final String LISTA_PRECIO = "LISTA_PRECIO";
     public static final String POSITION = "POSITION";
     public static final String POSITION_RESULTADO = "POSITION_RESULTADO";
@@ -202,28 +203,6 @@ public class RutasFragment extends Fragment implements RutaAdapter.IAddNewRuta{
     }
 
     @Override
-    public void goRemito(final String clienteId, final String clienteNombre, final String listaPrecioId,
-                         final String clienteCode, final String domicilioId, final String domicilioNombre,
-                         final int position){
-        final ProgressDialog progress = ProgressDialog.show(getActivity(), getString(R.string.app_name),
-                getString(R.string.string_working), true);
-        progress.show();
-
-        Intent i = new Intent(getActivity(),
-                RemitoActivity.class);
-        i.putExtra(CLIENTE_ID, Integer.parseInt(clienteId));
-        i.putExtra(DOMICILIO_ID, Integer.parseInt(domicilioId));
-        i.putExtra(CLIENTE_NOMBRE, clienteNombre);
-        i.putExtra(CLIENTE_CODE, clienteCode);
-        i.putExtra(DOMICILIO_NOMBRE, domicilioNombre);
-        i.putExtra(LISTA_PRECIO, listaPrecioId);
-        i.putExtra(POSITION, position);
-        startActivity(i);
-
-        progress.dismiss();
-    }
-
-    @Override
     public void goVisita(final String clienteId, final String clienteNombre, final String clienteCode,
                          final String domicilioId, final String domicilioNombre, final int position){
         final ProgressDialog progress = ProgressDialog.show(getActivity(), getString(R.string.app_name),
@@ -244,20 +223,21 @@ public class RutasFragment extends Fragment implements RutaAdapter.IAddNewRuta{
     }
 
     @Override
-    public void goCobranza(final String clienteId, final String clienteNombre, final String clienteCode,
+    public void goRemito(final String clienteId, final String clienteNombre, final String clienteCode,
                            final String listaPrecioId, final String domicilioId, final String domicilioNombre,
-                           final int position){
+                           final String saldo, final int position, final boolean isCobranza){
         final ProgressDialog progress = ProgressDialog.show(getActivity(), getString(R.string.app_name),
                 getString(R.string.string_working), true);
         progress.show();
 
-        AppPreferences.setBoolean(getActivity(), RemitoCobranzaFragment.COBRANZA, true);
+        AppPreferences.setBoolean(getActivity(), RemitoCobranzaFragment.COBRANZA, isCobranza);
         Intent i = new Intent(getActivity(),
                 RemitoActivity.class);
         i.putExtra(CLIENTE_ID, Integer.parseInt(clienteId));
         i.putExtra(DOMICILIO_ID, Integer.parseInt(domicilioId));
         i.putExtra(CLIENTE_NOMBRE, clienteNombre);
         i.putExtra(CLIENTE_CODE, clienteCode);
+        i.putExtra(CLIENTE_SALDO, saldo);
         i.putExtra(DOMICILIO_NOMBRE, domicilioNombre);
         i.putExtra(LISTA_PRECIO, listaPrecioId);
         i.putExtra(POSITION, position);

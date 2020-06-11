@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                             });
                         }else {
 
-                            final Repartidor repartidor = UserBusiness.login(getApplicationContext(), usuario, password);
+                            final Repartidor repartidor = UserBusiness.login2(getApplicationContext(), usuario, password);
                             if (repartidor.getId() > 0) {
 
                                 AppPreferences.setString(getApplicationContext(),

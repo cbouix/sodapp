@@ -83,6 +83,7 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
     String clienteCodeSeleccionado;
     String domicilioNombreSeleccionado;
     String listaPrecioId;
+    String saldo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,6 +98,7 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
         clienteNombreSeleccionado = getActivity().getIntent().getStringExtra(RutasFragment.CLIENTE_NOMBRE);
         domicilioNombreSeleccionado = getActivity().getIntent().getStringExtra(RutasFragment.DOMICILIO_NOMBRE);
         clienteCodeSeleccionado = getActivity().getIntent().getStringExtra(RutasFragment.CLIENTE_CODE);
+        saldo = getActivity().getIntent().getStringExtra(RutasFragment.CLIENTE_SALDO);
         listaPrecioId = getActivity().getIntent().getStringExtra(RutasFragment.LISTA_PRECIO);
 
         AppPreferences.setInt(getContext(), AppPreferences.KEY_POSITION, getActivity().getIntent().getIntExtra(RutasFragment.POSITION, 0));
@@ -276,6 +278,7 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
             cliente.setId(clienteIdSeleccionado);
             cliente.setCodigo(clienteCodeSeleccionado);
             cliente.setListPrecioId(listaPrecioId);
+            cliente.setSaldo(Double.parseDouble(saldo));
             clientes.add(0, cliente);
             spnClientes.setAdapter(new ArrayAdapter<>(getActivity(),
                     R.layout.adapter_spinner, R.id.tv_nombre, clientes));
