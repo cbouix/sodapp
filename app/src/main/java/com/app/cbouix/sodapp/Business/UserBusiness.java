@@ -58,24 +58,4 @@ public class UserBusiness {
         Repartidor repartidor = gson.fromJson(repartidorStr, Repartidor.class);
         return repartidor;
     }
-
-    public static void updateGcm(Context context, String token) throws IOException, JSONException {
-
-        String android_id = Settings.Secure.getString(context.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-
-        JSONObject payload = new JSONObject();
-        payload.put("ID", AppPreferences.getString(context, AppPreferences.KEY_REPARTIDOR, ""));
-        payload.put("Codigo", AppPreferences.getString(context, AppPreferences.KEY_COD_REPARTIDOR, ""));
-        payload.put("Nombre", AppPreferences.getString(context, AppPreferences.KEY_USUARIO, ""));
-        payload.put("AndroidId", android_id);
-        payload.put("GCMRegId", token);
-        payload.put("UsuarioId", AppPreferences.getString(context, AppPreferences.KEY_REPARTIDOR, ""));
-        payload.put("Login", AppPreferences.getString(context, AppPreferences.KEY_USUARIO, ""));
-        payload.put("EsAdministrador", "No");
-
-        String url = String.format(EnviromentManager.getUrl(context) + UPDATE_GCM,
-                AppPreferences.getString(context, AppPreferences.KEY_REPARTIDOR, ""));
-        UtilsServices.getStreamPut(url, payload.toString());
-    }
 }
