@@ -83,37 +83,6 @@
             android:name=".Activities.ReporteClienteActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-
-        <!-- PUSH NOTIFICATIONS -->
-        <receiver
-            android:name="com.google.android.gms.gcm.GcmReceiver"
-            android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="com.example.cbouix.sodapp" />
-            </intent-filter>
-        </receiver>
-        <service
-            android:name=".PushNotifications.GcmPushReceiverService"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-            </intent-filter>
-        </service>
-        <service
-            android:name=".PushNotifications.GcmTokenRefreshListenerService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
-            </intent-filter>
-        </service>
-        <service
-            android:name=".PushNotifications.GcmIntentServices"
-            android:exported="false">
-        </service>
-        <!-- end region-->
-
     </application>
 
 </manifest>

@@ -37,7 +37,6 @@ import com.app.cbouix.sodapp.Fragments.ReportesDelDiaFragment;
 import com.app.cbouix.sodapp.Fragments.RutasFragment;
 import com.app.cbouix.sodapp.Fragments.StockFragment;
 import com.app.cbouix.sodapp.Fragments.VisitaFragment;
-import com.app.cbouix.sodapp.PushNotifications.GcmIntentServices;
 import com.app.cbouix.sodapp.R;
 import com.app.cbouix.sodapp.Utils.AppDialogs;
 import com.google.android.gms.common.ConnectionResult;
@@ -291,10 +290,6 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        LocalBroadcastManager.getInstance(this).registerReceiver(registrationBroadcastReceiver,
-                new IntentFilter(GcmIntentServices.REGISTRATION_SUCCES));
-        LocalBroadcastManager.getInstance(this).registerReceiver(registrationBroadcastReceiver,
-                new IntentFilter(GcmIntentServices.REGISTRATION_FAIL));
     }
 
 
