@@ -11,13 +11,21 @@ public class Responce {
     private int id;
     @SerializedName("Responce")
     private String error;
+    @SerializedName("Error")
+    private String msj;
 
     public int getId() {
         return id;
     }
 
     public String getError() {
-        return error;
+        if(this.error == null)
+            return this.msj;
+        else
+            return this.error;
+    }
+    public String getMsj() {
+        return msj;
     }
 
     public void setError(String error) {

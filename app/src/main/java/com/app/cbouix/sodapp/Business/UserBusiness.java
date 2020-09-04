@@ -5,6 +5,7 @@ import android.provider.Settings;
 
 import com.app.cbouix.sodapp.DataAccess.DataAccess.Preferences.AppPreferences;
 import com.app.cbouix.sodapp.Models.Repartidor;
+import com.app.cbouix.sodapp.Models.TopeArticulo;
 import com.app.cbouix.sodapp.Services.EnviromentManager;
 import com.app.cbouix.sodapp.Services.UtilsServices;
 import com.google.gson.Gson;
@@ -16,6 +17,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by CBouix on 21/04/2017.
@@ -26,6 +30,7 @@ public class UserBusiness {
     private static final String LOGIN = "Login/%s,%s";
     private static final String LOGIN2 = "Login2";
     private static final String UPDATE_GCM = "updateGCM/%s";
+    private static final String GET_TOPE_CLIENTE = "getTopesCliente/%s";
 
     public static Repartidor login(Context context, String userName, String password) throws IOException {
         String url = String.format(EnviromentManager.getUrl(context) + LOGIN, userName, password);
@@ -57,5 +62,18 @@ public class UserBusiness {
         String repartidorStr= gson.fromJson(reader, String.class);
         Repartidor repartidor = gson.fromJson(repartidorStr, Repartidor.class);
         return repartidor;
+    }
+
+    public static ArrayList<TopeArticulo> getTopeByClient(Context context, long clientId) throws IOException {
+        String url = String.format(EnviromentManager.getUrl(context) + GET_TOPE_CLIENTE, clientId);
+        InputStream in = UtilsServices.getStream(url);
+        Gson gson = new Gson();
+
+        Reader reader = new InputStreamReader(in, "UTF-8");
+        String topeArticulosStr= gson.fromJson(reader, String.class);
+
+        TopeArticulo[] topeArticulos = new Gson().fromJson(topeArticulosStr, TopeArticulo[].class);
+
+        return new ArrayList<TopeArticulo>(Arrays.asList(topeArticulos));
     }
 }

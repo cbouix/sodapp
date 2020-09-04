@@ -37,6 +37,8 @@ public class Articulo {
 
     private boolean isDevolucion;
 
+    private long idDb;
+
     private int cantidad;
 
     public void setId(int id) {
@@ -85,6 +87,14 @@ public class Articulo {
 
     public void setUnidadMedidaCod(String unidadMedidaCod) {
         this.unidadMedidaCod = unidadMedidaCod;
+    }
+
+    public void setIdDb(long id) {
+        this.idDb = id;
+    }
+
+    public long getIdDb() {
+        return this.idDb;
     }
 
     public boolean isDevolucion() {

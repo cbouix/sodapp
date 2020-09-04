@@ -25,7 +25,7 @@
             android:id="@+id/txt_nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Diego O. Miguel de los palotes garcía"
+            android:text="Cristian de los palotes garcía"
             android:textColor="@color/colorAccent"
             android:textSize="18dp" />
         </LinearLayout>

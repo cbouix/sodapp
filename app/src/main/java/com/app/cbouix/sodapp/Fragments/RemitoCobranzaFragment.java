@@ -94,13 +94,13 @@ public class RemitoCobranzaFragment extends RemitoMasterFragment {
     }
 
     private void initControls(View rootView) {
-        spnClientes = (Spinner) rootView.findViewById(R.id.spn_clientes);
-        spnDomicilios = (Spinner) rootView.findViewById(R.id.spn_domicilios);
+        spnClientes = rootView.findViewById(R.id.spn_clientes);
+        spnDomicilios = rootView.findViewById(R.id.spn_domicilios);
 
-        ed_remitoUno = (EditText) rootView.findViewById(R.id.ed_remito_uno);
-        ed_remitoDos = (EditText) rootView.findViewById(R.id.ed_remito_dos);
+        ed_remitoUno = rootView.findViewById(R.id.ed_remito_uno);
+        ed_remitoDos = rootView.findViewById(R.id.ed_remito_dos);
 
-        final ImageView btnAddCliente = (ImageView) rootView.findViewById(R.id.btnAddCliente);
+        final ImageView btnAddCliente = rootView.findViewById(R.id.btnAddCliente);
         btnAddCliente.setEnabled(false);
         btnAddCliente.setBackgroundResource(R.drawable.ic_action_add_circle_disable);
         btnAddCliente.setOnClickListener(new View.OnClickListener() {

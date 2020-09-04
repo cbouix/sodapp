@@ -3,6 +3,8 @@ package com.app.cbouix.sodapp.Activities;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.app.cbouix.sodapp.DataAccess.DataAccess.DataBaseManager;
@@ -122,20 +124,20 @@ public class RemitoActivity  extends AppCompatActivity {
         if(AppPreferences.getBoolean(getApplicationContext(), RemitoCobranzaFragment.COBRANZA, false)){
             ActionBar.Tab tab = actionBar.newTab()
                     .setText(R.string.cobranza)
-                    .setTabListener(new TabListener<RemitoCobranzaFragment>(
+                    .setTabListener(new TabListener<>(
                             this, "cobranza", RemitoCobranzaFragment.class));
             actionBar.addTab(tab);
         }else{
             ActionBar.Tab tab = actionBar.newTab()
                     .setText(R.string.remito)
-                    .setTabListener(new TabListener<RemitoFragment>(
+                    .setTabListener(new TabListener<>(
                             this, "remito", RemitoFragment.class));
             actionBar.addTab(tab);
         }
 
         ActionBar.Tab tab = actionBar.newTab()
                 .setText(R.string.txt_medios_de_pago)
-                .setTabListener(new TabListener<MediosDePagoFragment>(
+                .setTabListener(new TabListener<>(
                         this, "mediosdepago", MediosDePagoFragment.class));
         actionBar.addTab(tab);
     }

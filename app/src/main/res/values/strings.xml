@@ -49,11 +49,13 @@
     <string name="empty_historial">No tiene historial el cliente</string>
     <string name="empty_mensajes">No tiene mensajes</string>
     <string name="empty_repartidores">No hay repartidores</string>
+    <string name="empty_tope">No hay un listado de tope de articulos</string>
     <string name="guardar">Guardar</string>
     <string name="enviar">Enviar</string>
     <string name="login">Login</string>
     <string name="configuracion">Configuración</string>
     <string name="send_remitos">Enviar remitos</string>
+    <string name="ver_tope">Ver Tope</string>
     <string name="hint_ruta">escribir la ruta</string>
 
     <string name="remito">Remito</string>
@@ -73,6 +75,7 @@
     <string name="titulo_configuracion">Configuración</string>
     <string name="titulo_send">Enviar remitos</string>
     <string name="titulo_nro_remito">Nro remito:</string>
+    <string name="titulo_tope_articulos">Tope de articulos</string>
 
     <string name="txt_nombre">Nombre: </string>
     <string name="txt_direccion">Dirección: </string>
@@ -111,6 +114,7 @@
     <string name="msj_editar_cobranza">¿Desea editar la cobranza seleccionada?</string>
     <string name="hint_escribe_mensaje">Escribe un mensaje</string>
     <string name="hint_direccion_ws">http://xxxx.xxxx.xxxx.xxxx/</string>
+    <string name="msj_cliente_zero">Debe seleccionar un cliente para saber el tope</string>
 
     <string name="msj_remito_no_guardado">Debe agregar articulos al remito</string>
     <string name="msj_cobranza_no_guardado">Debe guardar el remito</string>

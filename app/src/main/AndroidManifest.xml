@@ -47,7 +47,7 @@
         <activity
             android:name=".Activities.NovedadActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
 
         <activity
             android:name=".Activities.SelectDestinatarioActivity"
@@ -83,6 +83,11 @@
             android:name=".Activities.ReporteClienteActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.TopeArticulosActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="fullSensor" />
     </application>
 
 </manifest>

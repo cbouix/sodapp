@@ -1,8 +1,13 @@
 package com.app.cbouix.sodapp.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,6 +23,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.cbouix.sodapp.Activities.RemitoActivity;
+import com.app.cbouix.sodapp.Activities.TopeArticulosActivity;
 import com.app.cbouix.sodapp.Adapters.ArticulosAdapter;
 import com.app.cbouix.sodapp.Business.ArticuloBusiness;
 import com.app.cbouix.sodapp.Business.ClientesBusiness;
@@ -43,6 +50,9 @@ import com.google.gson.Gson;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.List;
+
+import de.greenrobot.dao.query.QueryBuilder;
 
 /**
  * Created by CBouix on 09/04/2017.
@@ -85,6 +95,7 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
     String listaPrecioId;
     String saldo;
 
+    public static final String CLIENTE_NOMBRE = "CLIENTE_NOMBRE";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -121,6 +132,29 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_tope, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_ver_tope:
+                showTopeCliente();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void initControls(View rootView){
@@ -191,10 +225,10 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
         btnAddArticulo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Integer.parseInt(ed_cantidad.getText().toString()) > 0){
-                    save_showArticulo(Integer.parseInt(ed_cantidad.getText().toString()), cbDevolucion.isChecked(), cbDevAuto.isChecked());
-                } else {
+                if(TextUtils.isEmpty(ed_cantidad.getText().toString()) || Integer.parseInt(ed_cantidad.getText().toString()) <= 0){
                     Toast.makeText(getActivity(), R.string.msj_articulo_mayor_a_cero, Toast.LENGTH_LONG).show();
+                } else {
+                    save_showArticulo(Integer.parseInt(ed_cantidad.getText().toString()), cbDevolucion.isChecked(), cbDevAuto.isChecked());
                 }
             }
         });
@@ -386,10 +420,20 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
                 //Guardo el Id de la cobranza
                 AppPreferences.setLong(getContext(),
                         AppPreferences.KEY_COBRANZA, cobranzaDao.getKey(cobranza));
+
+                //Muestro al repartidor el tope de articulos del cliente
+                //showTopeCliente();
             } catch (Exception ex) {
                 Toast.makeText(getActivity(), R.string.msj_error, Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    private void showTopeCliente(){
+        Intent i = new Intent(getActivity(),
+                TopeArticulosActivity.class);
+        i.putExtra(CLIENTE_NOMBRE, clienteNombreSeleccionado);
+        startActivity(i);
     }
 
     private void loadCliente(){
@@ -455,71 +499,6 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
         AppPreferences.setLong(getContext(),
                 AppPreferences.KEY_COBRANZA, cobranzaDao.getKey(cobranza));
 
-    }
-
-    private void save_showArticulo(int cantidad, boolean isDevolucion, boolean isDevAuto){
-
-        //Muestro el articulo seleccionado en la lista
-
-        //public Articulo(int id, String codigo, String nombre, double precio, String unidadMedidaCod,
-        //boolean isDevolucion, int cantidad){
-        Articulo current_articulo = new Articulo(articulo_seleccionado.getId(), articulo_seleccionado.getCodigo(),
-                articulo_seleccionado.getNombre(), articulo_seleccionado.getPrecio(), articulo_seleccionado.getUnidadMedidaCod(),
-                articulo_seleccionado.isDevolucion(), articulo_seleccionado.getCantidad());
-        current_articulo.setCantidad(cantidad);
-        articulos_seleccionados.add(current_articulo);
-
-        //Creo el articulo(RemitoLin) y lo guardo en la bd
-        RemitoLinDao remitoLinDao = DataBaseManager.getInstance().getDaoSession().getRemitoLinDao();
-
-        //Si esta activada la devolución automatica agrego el articulo devolución
-        if(isDevAuto){
-            Articulo devolucion = new Articulo();
-            devolucion.setCodigo(current_articulo.getCodigo());
-            devolucion.setCantidad(current_articulo.getCantidad()*-1);
-            devolucion.setNombre(current_articulo.getNombre());
-            devolucion.setPrecio(0);
-            devolucion.setUnidadMedidaCod(current_articulo.getUnidadMedidaCod());
-            devolucion.setDevolucion(true);
-            articulos_seleccionados.add(devolucion);
-
-            RemitoLin cuerpoRemitoDev = new RemitoLin();
-            Long idRemito = AppPreferences.getLong(getContext(), AppPreferences.KEY_REMITO, 0);
-            cuerpoRemitoDev.setRemitoId(idRemito);
-            cuerpoRemitoDev.setArticuloId(current_articulo.getId());
-            cuerpoRemitoDev.setArticuloCod(current_articulo.getCodigo());
-            cuerpoRemitoDev.setArticuloNombre(current_articulo.getNombre());
-            cuerpoRemitoDev.setUnMedidaCod(current_articulo.getUnidadMedidaCod());
-            cuerpoRemitoDev.setCantidad(current_articulo.getCantidad()*-1);
-            cuerpoRemitoDev.setPrecio(0.0);
-            cuerpoRemitoDev.setTipoCod("DEVOLUCION");
-            cuerpoRemitoDev.setSigno(-1);
-
-            remitoLinDao.insertOrReplace(cuerpoRemitoDev);
-        }
-
-        current_articulo.setDevolucion(isDevolucion);
-
-        showArticulos();
-
-        //Agrego el articulo a la base de datos
-        RemitoLin cuerpoRemito = new RemitoLin();
-        Long idRemito = AppPreferences.getLong(getContext(), AppPreferences.KEY_REMITO, 0);
-        cuerpoRemito.setRemitoId(idRemito);
-        cuerpoRemito.setArticuloId(current_articulo.getId());
-        cuerpoRemito.setArticuloCod(current_articulo.getCodigo());
-        cuerpoRemito.setArticuloNombre(current_articulo.getNombre());
-        cuerpoRemito.setUnMedidaCod(current_articulo.getUnidadMedidaCod());
-        cuerpoRemito.setCantidad((isDevolucion) ? (current_articulo.getCantidad()*-1) : current_articulo.getCantidad());
-        cuerpoRemito.setPrecio((isDevolucion) ? 0 : (current_articulo.getPrecio()));
-        cuerpoRemito.setTipoCod((isDevolucion) ? "DEVOLUCION": "ENTREGA");
-        cuerpoRemito.setSigno((isDevolucion) ? -1 : 1);
-
-        importeTotal = (isDevolucion) ? importeTotal : importeTotal + current_articulo.getPrecio() * cantidad;
-        AppPreferences.setString(getContext(), AppPreferences.KEY_IMPORTE_TOTAL, String.valueOf(importeTotal));
-        txtImporteTotal.setText(importeTotal + " $");
-
-        remitoLinDao.insertOrReplace(cuerpoRemito);
     }
 
     private void saveArticulos(ArrayList<Articulo> articulos){
@@ -782,6 +761,75 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
         }).start();
     }
 
+    long articuloId = 0;
+    private void save_showArticulo(int cantidad, boolean isDevolucion, boolean isDevAuto){
+
+        //Muestro el articulo seleccionado en la lista
+
+        //public Articulo(int id, String codigo, String nombre, double precio, String unidadMedidaCod,
+        //boolean isDevolucion, int cantidad
+        articuloId++;
+        Articulo current_articulo = new Articulo(articulo_seleccionado.getId(), articulo_seleccionado.getCodigo(),
+                articulo_seleccionado.getNombre(), articulo_seleccionado.getPrecio(), articulo_seleccionado.getUnidadMedidaCod(),
+                articulo_seleccionado.isDevolucion(), articulo_seleccionado.getCantidad());
+        current_articulo.setIdDb(articuloId);
+        current_articulo.setCantidad(cantidad);
+        articulos_seleccionados.add(current_articulo);
+
+        //Creo el articulo(RemitoLin) y lo guardo en la bd
+        RemitoLinDao remitoLinDao = DataBaseManager.getInstance().getDaoSession().getRemitoLinDao();
+
+        //Agrego el articulo a la base de datos
+        RemitoLin cuerpoRemito = new RemitoLin();
+        Long idRemito = AppPreferences.getLong(getContext(), AppPreferences.KEY_REMITO, 0);
+        cuerpoRemito.setId(articuloId);
+        cuerpoRemito.setRemitoId(idRemito);
+        cuerpoRemito.setArticuloId(current_articulo.getId());
+        cuerpoRemito.setArticuloCod(current_articulo.getCodigo());
+        cuerpoRemito.setArticuloNombre(current_articulo.getNombre());
+        cuerpoRemito.setUnMedidaCod(current_articulo.getUnidadMedidaCod());
+        cuerpoRemito.setCantidad((isDevolucion) ? (current_articulo.getCantidad()*-1) : current_articulo.getCantidad());
+        cuerpoRemito.setPrecio((isDevolucion) ? 0 : (current_articulo.getPrecio()));
+        cuerpoRemito.setTipoCod((isDevolucion) ? "DEVOLUCION": "ENTREGA");
+        cuerpoRemito.setSigno((isDevolucion) ? -1 : 1);
+
+        remitoLinDao.insertOrReplace(cuerpoRemito);
+
+        //Si esta activada la devolución automatica agrego el articulo devolución
+        if(isDevAuto){
+            articuloId++;
+            Articulo devolucion = new Articulo();
+            devolucion.setIdDb(articuloId);
+            devolucion.setCodigo(current_articulo.getCodigo());
+            devolucion.setCantidad(current_articulo.getCantidad()*-1);
+            devolucion.setNombre(current_articulo.getNombre());
+            devolucion.setPrecio(0);
+            devolucion.setUnidadMedidaCod(current_articulo.getUnidadMedidaCod());
+            devolucion.setDevolucion(true);
+            articulos_seleccionados.add(devolucion);
+
+            RemitoLin cuerpoRemitoDev = new RemitoLin();
+            cuerpoRemitoDev.setRemitoId(idRemito);
+            cuerpoRemitoDev.setId(articuloId);
+            cuerpoRemitoDev.setArticuloId(current_articulo.getId());
+            cuerpoRemitoDev.setArticuloCod(current_articulo.getCodigo());
+            cuerpoRemitoDev.setArticuloNombre(current_articulo.getNombre());
+            cuerpoRemitoDev.setUnMedidaCod(current_articulo.getUnidadMedidaCod());
+            cuerpoRemitoDev.setCantidad(current_articulo.getCantidad()*-1);
+            cuerpoRemitoDev.setPrecio(0.0);
+            cuerpoRemitoDev.setTipoCod("DEVOLUCION");
+            cuerpoRemitoDev.setSigno(-1);
+
+            remitoLinDao.insertOrReplace(cuerpoRemitoDev);
+        }
+        current_articulo.setDevolucion(isDevolucion);
+
+        showArticulos();
+        importeTotal = (isDevolucion) ? importeTotal : importeTotal + current_articulo.getPrecio() * cantidad;
+        AppPreferences.setString(getContext(), AppPreferences.KEY_IMPORTE_TOTAL, String.valueOf(importeTotal));
+        txtImporteTotal.setText(importeTotal + " $");
+    }
+
     ArticulosAdapter adapter;
     private void showArticulos(){
         adapter = new ArticulosAdapter(getActivity(), articulos_seleccionados, this);
@@ -797,5 +845,14 @@ public class RemitoFragment extends RemitoMasterFragment implements ArticulosAda
         }
         articulos_seleccionados.remove(position);
         adapter.notifyDataSetChanged();
+
+        RemitoLinDao remitoLinDao = DataBaseManager.getInstance().getDaoSession().getRemitoLinDao();
+        QueryBuilder queryBuilderRemito = remitoLinDao.queryBuilder().where
+                (RemitoLinDao.Properties.Id.eq(articulo.getIdDb()));
+        List<RemitoLin> listRemitoLin = queryBuilderRemito.list();
+        if(listRemitoLin.size() >= 0){
+            RemitoLin item = listRemitoLin.get(0);
+            remitoLinDao.delete(item);
+        }
     }
 }
